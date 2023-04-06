@@ -56,6 +56,7 @@ public class Text{
     }
 
     public void checkSingleMove(int count){
+        Main m = new Main();
         if(count > 2) {
             System.out.println("\n" + "Type move to move a piece");
         } else {
@@ -71,7 +72,7 @@ public class Text{
             int end = scan.nextInt();
 
             //execute move
-            Main.executeMove("cMove", start, end);
+            m.executeMove("cMove", start, end);
         }
         else if(ask.equals("jump")){
             //set up move
@@ -82,7 +83,7 @@ public class Text{
             int end = scan.nextInt();
 
             //execute move
-            Main.executeMove("cJump", start, end);
+            m.executeMove("cJump", start, end);
 
         } else {
             System.out.println("Invalid Input: please type either move or jump, all lowercase"); //print board

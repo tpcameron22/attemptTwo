@@ -211,11 +211,11 @@ public class Gobblet implements IGame{
     }
 
     public void placePiece(IMove move, IGame gameObj) {
-
+        gobMove gMove = (gobMove) move;
         //get row and col
-        int moveX = Integer.parseInt(Integer.toString(move.pMove).substring(0, 1)) - 1;//first digit  cant be zero which is why i have to do this whole shabang
-        int moveY = Integer.parseInt(Integer.toString(move.pMove).substring(1, 2)) - 1;//second digit
-        int piece = Integer.parseInt(Integer.toString(move.pMove).substring(2, 3));//third digit
+        int moveX = Integer.parseInt(Integer.toString(gMove.pMove).substring(0, 1)) - 1;//first digit  cant be zero which is why i have to do this whole shabang
+        int moveY = Integer.parseInt(Integer.toString(gMove.pMove).substring(1, 2)) - 1;//second digit
+        int piece = Integer.parseInt(Integer.toString(gMove.pMove).substring(2, 3));//third digit
 
 
         //execute move
@@ -233,14 +233,14 @@ public class Gobblet implements IGame{
         }
     }
 
-
     public void movePiece(IMove move, IGame gameObj) {
+        gobMove gMove = (gobMove) move;
         //starting coordinates
-        int startX = Integer.parseInt(Integer.toString(move.start).substring(0, 1)) - 1;//;
-        int startY = Integer.parseInt(Integer.toString(move.start).substring(1, 2)) - 1;
+        int startX = Integer.parseInt(Integer.toString(gMove.start).substring(0, 1)) - 1;//;
+        int startY = Integer.parseInt(Integer.toString(gMove.start).substring(1, 2)) - 1;
         //ending coordinates
-        int endX = Integer.parseInt(Integer.toString(move.end).substring(0, 1)) - 1;//;
-        int endY = Integer.parseInt(Integer.toString(move.end).substring(1, 2)) - 1;
+        int endX = Integer.parseInt(Integer.toString(gMove.end).substring(0, 1)) - 1;//;
+        int endY = Integer.parseInt(Integer.toString(gMove.end).substring(1, 2)) - 1;
 
         //if move is valid, do move
         if (isValidMove(startX, startY, endX, endY, gameObj)) {
@@ -252,5 +252,9 @@ public class Gobblet implements IGame{
             Text.printBoard(gameObj);
         }
     }
+
+
+    //only here to fulfill the interface
+    public void jumpPiece(IMove move, IGame gameObj){}
 }
 

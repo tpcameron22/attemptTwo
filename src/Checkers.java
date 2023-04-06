@@ -1,3 +1,5 @@
+import java.util.Stack;
+
 public class Checkers implements IGame{
     public final String BLACK = "\033[0;30m";   // BLACK
     public final String RESET = "\033[0m";  // Text Reset
@@ -160,13 +162,13 @@ public class Checkers implements IGame{
         return true;
     }
     public void jumpPiece(IMove move, IGame gameObj){
-
+        checkMove cMove = (checkMove) move;
         //starting coordinates
-        int startX = Integer.parseInt(Integer.toString(move.start).substring(0, 1))-1;
-        int startY = Integer.parseInt(Integer.toString(move.start).substring(1, 2))-1;
+        int startX = Integer.parseInt(Integer.toString(cMove.start).substring(0, 1))-1;
+        int startY = Integer.parseInt(Integer.toString(cMove.start).substring(1, 2))-1;
         //ending coordinates
-        int endX = Integer.parseInt(Integer.toString(move.end).substring(0, 1))-1;
-        int endY = Integer.parseInt(Integer.toString(move.end).substring(1, 2))-1;
+        int endX = Integer.parseInt(Integer.toString(cMove.end).substring(0, 1))-1;
+        int endY = Integer.parseInt(Integer.toString(cMove.end).substring(1, 2))-1;
         //mid coordinates (jumped piece)
         int midX = (endX - startX)/ 2 + startX;
         int midY = (endY - startY)/ 2 + startY;
@@ -191,26 +193,26 @@ public class Checkers implements IGame{
 
         //we must do 3 for new start/end and when it is parsed into the jump, it subtracts one
 
-        move.start = Integer.parseInt(Integer.toString(endX + 1) + Integer.toString(endY + 1)); // make new start position
+        cMove.start = Integer.parseInt(Integer.toString(endX + 1) + Integer.toString(endY + 1)); // make new start position
 
         if(isValidJump(endX, endY, endX + 2, endY + 2, gameObj)){         //IF two diagonal is valid jump
-            move.end = Integer.parseInt(Integer.toString(endX + 3) + Integer.toString(endY + 3)); //combine into single int
+            cMove.end = Integer.parseInt(Integer.toString(endX + 3) + Integer.toString(endY + 3)); //combine into single int
             jumpPiece(move, gameObj);                                 //do jump
             System.out.print("\n Double Jump!");
 
         }
         else if(isValidJump(endX, endY, endX - 2, endY + 2, gameObj)){
-            move.end = Integer.parseInt(Integer.toString(endX - 1) + Integer.toString(endY + 3));
+            cMove.end = Integer.parseInt(Integer.toString(endX - 1) + Integer.toString(endY + 3));
             jumpPiece(move, gameObj);
             System.out.print("\n Double Jump!");
         }
         else if(isValidJump(endX, endY, endX - 2, endY - 2, gameObj)){
-            move.end = Integer.parseInt(Integer.toString(endX - 1) + Integer.toString(endY - 1));
+            cMove.end = Integer.parseInt(Integer.toString(endX - 1) + Integer.toString(endY - 1));
             jumpPiece(move, gameObj);
             System.out.print("\n Double Jump!");
         }
         else if(isValidJump(endX, endY, endX + 2, endY - 2, gameObj)){
-            move.end = Integer.parseInt(Integer.toString(endX + 3) + Integer.toString(endY - 1));
+            cMove.end = Integer.parseInt(Integer.toString(endX + 3) + Integer.toString(endY - 1));
             jumpPiece(move, gameObj);
             System.out.print("\n Double Jump!");
         }
@@ -218,13 +220,14 @@ public class Checkers implements IGame{
     }
 
     public void movePiece(IMove move, IGame gameObj){
+        checkMove cMove = (checkMove) move;
 
         //starting coordinates
-        int startX = Integer.parseInt(Integer.toString(move.start).substring(0, 1))-1;//;
-        int startY = Integer.parseInt(Integer.toString(move.start).substring(1, 2))-1;
+        int startX = Integer.parseInt(Integer.toString(cMove.start).substring(0, 1))-1;//;
+        int startY = Integer.parseInt(Integer.toString(cMove.start).substring(1, 2))-1;
         //ending coordinates
-        int endX = Integer.parseInt(Integer.toString(move.end).substring(0, 1))-1;
-        int endY = Integer.parseInt(Integer.toString(move.end).substring(1, 2))-1;
+        int endX = Integer.parseInt(Integer.toString(cMove.end).substring(0, 1))-1;
+        int endY = Integer.parseInt(Integer.toString(cMove.end).substring(1, 2))-1;
 
         //if move is valid, do move
         if (isValidMove(startX, startY, endX, endY, gameObj)) {
@@ -240,5 +243,17 @@ public class Checkers implements IGame{
         }
     }
 
+
+//these are just here to fufill the interface
+    public boolean isValidPlace(int moveX, int moveY, int piece, IGame iGame){
+        return true;
+    }
+    public Stack<Piece>[] makePieces(PlayerNumber player) {
+        Stack<Piece>[] pieces = new Stack[3];
+        return pieces;
+    }
+
+    public void placePiece(IMove move, IGame iGame){
+    }
 
 }

@@ -86,11 +86,11 @@ public class Main {
 
         switch (move) {
             case "gPlace" :
-                gobMove gMove = new gobMove(pMove);
+                IMove gMove = new gobMove(pMove);
                 gameObj.placePiece(gMove, gameObj); //when executeMove is called, the instance of gameObj resets. fixed by passing igame into executeMove
                 break;
             case "gMove" :
-                gobMove gMove1 = new gobMove(start, end);
+                IMove gMove1 = new gobMove(start, end);
                 gameObj.movePiece(gMove1, gameObj);
                 break;
         }
@@ -99,6 +99,7 @@ public class Main {
     public void executeMove(String move, int start, int end){
 
         checkMove cMove = new checkMove(start, end);
+
         switch (move) {
             case "cMove":
 
