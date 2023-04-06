@@ -6,6 +6,46 @@ public class Text{
 
     //prepare scanner
     Scanner scan = new Scanner(System.in);
+    public void mainMenu(){
+        Main m = new Main();
+        System.out.println("Type the number of the game you wish to play \n 1. GOBLET \n 2. CHECKERS \n 3. CONNECT-FOUR \n \n To View rules, Type: 4");
+        int choice = scan.nextInt();
+        if(choice == 1){
+            m.runGob();
+        }else if(choice == 2) {
+            m.runCheckers();
+            System.out.println("Checkers has not been implemented please come back later");
+        } else if (choice == 3) {
+            //runConnect-Four();
+            System.out.println("Connect-Four has not been implemented please come back later");
+            mainMenu();
+        } else if (choice == 4) {
+            rules();
+        } else {
+            System.out.println("Please choose a number from the list above");
+            mainMenu();
+        }
+    }
+
+    public void rules() {
+        System.out.println("What rules would you like to view? type the number next to the game of choice \n 1. GOBLET \n 2. CHECKERS \n 3. CONNECT-FOUR \n \n To return to the main menu, type: 4");
+        int choice = scan.nextInt();
+        if(choice == 1){
+            System.out.println("Gobblet rules");
+            rules();
+        }else if(choice == 2) {
+            System.out.println("Checkers rules");
+            rules();
+        }else if(choice == 3) {
+            System.out.println("Connect-Four rules");
+            rules();
+        }else if(choice == 4) {
+            mainMenu();
+        } else {
+            System.out.println("Please choose a number from the list above");
+            rules();
+        }
+    }
 
     public void displayTurn(boolean player1) {
         //state whose turn it is and print their available pieces
@@ -55,7 +95,7 @@ public class Text{
         }
     }
 
-    public void checkSingleMove(int count){
+    public void checkSingleMove(int count, IGame gameObj){
         Main m = new Main();
         if(count > 2) {
             System.out.println("\n" + "Type move to move a piece");
@@ -72,7 +112,7 @@ public class Text{
             int end = scan.nextInt();
 
             //execute move
-            m.executeMove("cMove", start, end);
+            m.executeMove("cMove", start, end, gameObj );
         }
         else if(ask.equals("jump")){
             //set up move
@@ -83,7 +123,7 @@ public class Text{
             int end = scan.nextInt();
 
             //execute move
-            m.executeMove("cJump", start, end);
+            m.executeMove("cJump", start, end, gameObj);
 
         } else {
             System.out.println("Invalid Input: please type either move or jump, all lowercase"); //print board

@@ -8,8 +8,8 @@ public class Main {
 
 
     public static void main(String[] args) {
-        Main m = new Main();
-        m.runGob();
+        Text t = new Text();
+        t.mainMenu();
     }
     public void runGob(){
         gameObj = new Gobblet();
@@ -73,7 +73,7 @@ public class Main {
             //execute turn
             while (singleMove) {
                 //execute single move
-                text.checkSingleMove(count);
+                text.checkSingleMove(count, gameObj);
 
                 //check for gameStatus
                 checkWinner();
@@ -91,7 +91,7 @@ public class Main {
         gameObj.makeMove(move, gMove ,gameObj);
     }
 
-    public void executeMove(String move, int start, int end){
+    public void executeMove(String move, int start, int end, IGame gameObj){
         checkMove cMove = new checkMove(start, end);
         gameObj.makeMove(move, cMove ,gameObj);
     }
