@@ -243,17 +243,22 @@ public class Checkers implements IGame{
         }
     }
 
-
-//these are just here to fufill the interface
-    public boolean isValidPlace(int moveX, int moveY, int piece, IGame iGame){
-        return true;
+    public void makeMove(String move, IMove iMove, IGame gameObj){
+        switch (move) {
+            case "cJump" :
+                jumpPiece(iMove, gameObj);
+                break;
+            case "cMove" :
+                movePiece(iMove, gameObj);
+                break;
+        }
     }
+
+
+//these are just here to fulfill the interface
     public Stack<Piece>[] makePieces(PlayerNumber player) {
         Stack<Piece>[] pieces = new Stack[3];
         return pieces;
-    }
-
-    public void placePiece(IMove move, IGame iGame){
     }
 
 }

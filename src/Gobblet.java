@@ -1,14 +1,15 @@
 import java.util.Stack;
 
 public class Gobblet implements IGame{
-
-    public static Stack<Piece>[] p1Pieces;
-    public static Stack<Piece>[] p2Pieces;
     public final String BLACK = "\033[0;30m";   // BLACK
     public final String RESET = "\033[0m";  // Text Reset
     public final String WHITE_BOLD = "\033[1;97m";   // WHITE
     public final String WHITE = "\033[0;37m";   // WHITE
+
+
     public Stack<Piece>[][] Board = new Stack[4][4];
+    public static Stack<Piece>[] p1Pieces;
+    public static Stack<Piece>[] p2Pieces;
 
 
     public void fillBoard(IGame gameObj) {
@@ -129,7 +130,6 @@ public class Gobblet implements IGame{
     public PlayerNumber getPlayer() {
         return Main.count % 2 == 0 ? PlayerNumber.ONE : PlayerNumber.TWO;
     }
-
 
     public Stack<Piece>[] makePieces(PlayerNumber player) {
         Stack<Piece>[] pieces = new Stack[3];
@@ -253,8 +253,15 @@ public class Gobblet implements IGame{
         }
     }
 
-
-    //only here to fulfill the interface
-    public void jumpPiece(IMove move, IGame gameObj){}
+    public void makeMove(String move, IMove iMove, IGame gameObj){
+        switch (move) {
+            case "gPlace" :
+                placePiece(iMove, gameObj);
+                break;
+            case "gMove" :
+                movePiece(iMove, gameObj);
+                break;
+        }
+    }
 }
 

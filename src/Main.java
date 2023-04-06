@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public class Main {
     public static int count = 0;
     public static boolean singleMove = true;
@@ -83,32 +85,15 @@ public class Main {
         }
     }
     public void executeMove(String move, int start, int end, int pMove, IGame gameObj) {
-
-        switch (move) {
-            case "gPlace" :
-                IMove gMove = new gobMove(pMove);
-                gameObj.placePiece(gMove, gameObj); //when executeMove is called, the instance of gameObj resets. fixed by passing igame into executeMove
-                break;
-            case "gMove" :
-                IMove gMove1 = new gobMove(start, end);
-                gameObj.movePiece(gMove1, gameObj);
-                break;
-        }
+        IMove gMove;
+            if(Objects.equals(move, "gPlace")){ gMove = new gobMove(pMove);}
+            else{ gMove = new gobMove(start, end);}
+        gameObj.makeMove(move, gMove ,gameObj);
     }
 
     public void executeMove(String move, int start, int end){
-
         checkMove cMove = new checkMove(start, end);
-
-        switch (move) {
-            case "cMove":
-
-                gameObj.movePiece(cMove, gameObj); // need movePiece to take in IMove not specific class
-                break;
-            case "cJump":
-                gameObj.jumpPiece(cMove, gameObj); //
-                break;
-        }
+        gameObj.makeMove(move, cMove ,gameObj);
     }
     public void checkWinner(){
 
@@ -117,6 +102,4 @@ public class Main {
             game = false;//end game cycle
         }
     }
-
-//everything "works" besides IMOVe kerbackle. IMove doesnt have fields so i cant access the fields needed.
 }
