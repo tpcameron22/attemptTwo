@@ -83,6 +83,9 @@ public class Main {
             singleMove = true; //reset singleMove
 
         }
+        //bring back to menu when game ends
+        Text t = new Text();
+        t.mainMenu();
     }
     public void executeMove(String move, int start, int end, int pMove, IGame gameObj) {
         IMove gMove;
